@@ -1,0 +1,25 @@
+.menuIcon {
+    font-size: 25px !important;
+    margin-right: 0 !important;
+}
+
+.bottomMenu {
+    width: 100%;
+    justify-content: space-evenly;
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;  
+    background-color: rgb(255, 255, 255);    
+    box-shadow: 0 1px 0 0 #e4e3e3, 0 0 0 1px #e6e1e1;
+    z-index: 999;
+    height: 40px;  
+}
+
+.footerLong {
+    display: block;
+}
+
+.footerShort {
+    display: none;
+}
