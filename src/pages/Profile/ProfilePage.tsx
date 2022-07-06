@@ -65,11 +65,13 @@ export const ProfilePage = () => {
 
     useEffect(() => {
         refreshProfile();
+        if (autorizedUserId===undefined && params.userId===undefined)
+            navigate(routeNames.about);
     },[params.userId, autorizedUserId]);
 
     if (!profile)
         return <Preloader isBlackStyle={false} />
-      
+     
     return (
         <div className='profile'>
             <ProfileInfo profile={profile} isOwner={!params.userId} status={status} isAuth={isAuth} />

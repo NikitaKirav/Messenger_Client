@@ -1,10 +1,10 @@
 /** Absolute imports */
-import React from 'react';
+import React, { useState } from 'react';
 import { createStructuredSelector } from 'reselect';
 import { useSelector } from 'react-redux';
 
 /** Ant design */
-import { Button, Upload, Modal, message } from 'antd';
+import { Button, Upload, Modal, message, Progress } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
 /** Store */
@@ -29,8 +29,9 @@ import { baseUrl } from '../../../../../services/baseURL';
 
 
 export const ImageAvatar: React.FC<ImageAvatarType> = React.memo(({profile, isOwner, isAuth, onMainPhotoSelected, sendCorrectedMainPhoto}) => {
-    const [visible, setVisible] = React.useState(false);
-    const [confirmLoading, setConfirmLoading] = React.useState(false);
+    const [visible, setVisible] = useState(false);
+    const [defaultFileList, setDefaultFileList] = useState([]);
+    const [keyReactCropper, setKeyReactCropper] = useState(0);
 
     const selectors = createStructuredSelector<
         ApplicationState,
@@ -42,13 +43,12 @@ export const ImageAvatar: React.FC<ImageAvatarType> = React.memo(({profile, isOw
     const { photo } = useSelector(selectors);
   
     const showModal = () => {
+      setKeyReactCropper(old => old + 1);
       setVisible(true);
     };
   
     const handleOk = () => {
-      setConfirmLoading(true);
         setVisible(false);
-        setConfirmLoading(false);
         sendCorrectedMainPhoto(photo);
     };
   
@@ -58,12 +58,19 @@ export const ImageAvatar: React.FC<ImageAvatarType> = React.memo(({profile, isOw
 
     const props = {
         beforeUpload: (file: File) => {
-          if ((file.type !== 'image/jpeg') && (file.type !== 'image/png'))  {
+          const isImage = ((file.type === 'image/jpeg') || (file.type === 'image/png'));
+          if (!isImage)  {
             message.error(`${file.name} is not a png or jpg file`);
           }
-          return file.type === 'image/jpeg' || file.type === 'image/png' ? true : false;
+          return isImage || Upload.LIST_IGNORE;
+        },
+        customRequest: async (options: any) => {
+            const { onSuccess } = options;
+            onSuccess("Ok");
         },
         onChange: (info: any) => {
+            console.log(info);
+            setDefaultFileList(info.fileList);
             if (info.file.status !== 'uploading') {
                 onMainPhotoSelected(info);
             }
@@ -86,14 +93,14 @@ export const ImageAvatar: React.FC<ImageAvatarType> = React.memo(({profile, isOw
                         title="Image editor"
                         visible={visible}
                         onOk={handleOk}
-                        confirmLoading={confirmLoading}
                         onCancel={handleCancel}>
-                        <ReactCropper rerender={confirmLoading} /> 
-                        <Upload {...props}  > 
-                            <Button>
-                            <UploadOutlined /> Upload new Image
-                        </Button>
-                    </Upload> 
+                        <ReactCropper key={keyReactCropper} /> 
+                        <Upload {...props} > 
+                            {defaultFileList.length >= 1 ? null :
+                            <Button style={{marginTop: '15px'}}>
+                                <UploadOutlined /> Upload new Image
+                            </Button> }
+                        </Upload>
                     </Modal>
                 </div>
                 :
