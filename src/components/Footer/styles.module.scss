@@ -14,6 +14,7 @@
     box-shadow: 0 1px 0 0 #e4e3e3, 0 0 0 1px #e6e1e1;
     z-index: 999;
     height: 40px;  
+    margin: 0;
 }
 
 .footerLong {
@@ -22,4 +23,28 @@
 
 .footerShort {
     display: none;
+}
+
+.menu_nav {
+    list-style: none;
+    line-height: 46px;
+    .menu_link {
+        display: block;
+        color: rgba(0,0,0,.85);
+        height: 40px;
+
+        span {
+            margin-right: 10px;
+        }
+    }
+
+    .menu_item .menu_link.active {
+        color: #1890ff;
+        border-bottom: 2px solid #1890ff;
+    }
+
+    .menu_item .menu_link:hover {
+        color: #1890ff;
+        border-bottom: 2px solid #1890ff;
+    }
 }

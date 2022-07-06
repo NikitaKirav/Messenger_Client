@@ -16,18 +16,17 @@ import { baseUrl } from "../../../../../services/baseURL";
 
 
 interface PropsType {
-  rerender: boolean;
+  key: number;
 }
 
 interface ReactCropperSelectors {
     photoLarge: string | undefined | null;
 }
 
-export const ReactCropper: React.FC<PropsType> = React.memo(({rerender}) => {
+export const ReactCropper: React.FC<PropsType> = React.memo(({key}) => {
 
   const dispatch = useDispatch();
   const cropperRef = useRef<HTMLImageElement>(null);
-  const [key, setKey] = useState(0);
 
   const selectors = createStructuredSelector<
     ApplicationState,
@@ -38,15 +37,13 @@ export const ReactCropper: React.FC<PropsType> = React.memo(({rerender}) => {
 
   const { photoLarge } = useSelector(selectors);
 
-  useEffect(() => {
-    setKey(key + 1);
-  }, [rerender])
-
   const onCrop = () => {
     const imageElement: any = cropperRef?.current;
     const cropper: any = imageElement?.cropper;
-    let imageData = cropper.getCroppedCanvas().toDataURL();
-    dispatch(addPhoto(imageData));
+    if(cropper && cropper.getCroppedCanvas()) {
+      const imageData = cropper.getCroppedCanvas().toDataURL();
+      dispatch(addPhoto(imageData));
+    }
   };
 
   return (<div key={key}>

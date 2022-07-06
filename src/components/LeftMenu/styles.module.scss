@@ -1,0 +1,23 @@
+.menu_nav {
+    list-style: none;
+    line-height: 40px;
+    font-size: 14px;
+    font-weight: 400;
+    .menu_link {
+        display: block;
+        padding: .5rem 1rem;
+        color: rgba(0,0,0,.85);
+
+        span {
+            margin-right: 10px;
+        }
+    }
+
+    .menu_item .menu_link.active {
+        color: #1890ff;
+    }
+
+    .menu_item .menu_link:hover {
+        color: #1890ff;
+    }
+}

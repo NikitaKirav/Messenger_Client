@@ -15,7 +15,7 @@ import classes from './styles.module.scss';
 
 const { Content } = Layout;
 
-interface Props {
+interface Props { 
     component: any;
     // All other props
     [x:string]: any;

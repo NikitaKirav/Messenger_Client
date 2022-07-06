@@ -1,6 +1,7 @@
 /** Absolute imports */
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import classNames from 'classnames';
 
 /** Ant Design */
 import Sider from 'antd/lib/layout/Sider';
@@ -10,24 +11,39 @@ import { UserOutlined, MessageOutlined, TeamOutlined, QuestionCircleOutlined } f
 /** Route */
 import { routeNames } from '../../routes';
 
+/** Styles */
+import classes from './styles.module.scss';
+
+
 interface PropsType {
-    className: string | undefined;
+    className?: string | undefined;
 }
 
 export const LeftMenu: React.FC<PropsType> = ({className}) => {
     return (
         <Sider className={className} width={150} style={{ background: 'none' }}>
-            <Menu
-                mode="inline"
-                defaultSelectedKeys={['1']}
-                defaultOpenKeys={['sub1']}
-                style={{ height: '100%', background: 'none' }}
-            >
-                <Menu.Item key="1"><Link to={routeNames.myProfile}><UserOutlined />Profile</Link></Menu.Item>
-                <Menu.Item key="2"><Link to={routeNames.users}><TeamOutlined />Users</Link></Menu.Item>
-                <Menu.Item key="3"><Link to={routeNames.chatlist}><MessageOutlined />Chat</Link></Menu.Item>
-                <Menu.Item key="4"><Link to={routeNames.about}><QuestionCircleOutlined />About</Link></Menu.Item>
-            </Menu>
+            <ul className={classes.menu_nav}>
+                <li className={classes.menu_item}>
+                    <NavLink to={routeNames.myProfile} className={({isActive}) => isActive ? classNames(classes.active,classes.menu_link) : classes.menu_link}>
+                        <UserOutlined />Profile
+                    </NavLink>
+                </li>
+                <li className={classes.menu_item}>
+                    <NavLink to={routeNames.users} className={({isActive}) => isActive ? classNames(classes.active,classes.menu_link) : classes.menu_link}>
+                        <TeamOutlined />Users
+                    </NavLink>
+                </li>
+                <li className={classes.menu_item}>
+                    <NavLink to={routeNames.chatlist} className={({isActive}) => isActive ? classNames(classes.active,classes.menu_link) : classes.menu_link}>
+                        <MessageOutlined />Chat
+                    </NavLink>
+                </li>
+                <li className={classes.menu_item}>
+                    <NavLink to={routeNames.about} className={({isActive}) => isActive ? classNames(classes.active,classes.menu_link) : classes.menu_link}>
+                        <QuestionCircleOutlined />About
+                    </NavLink>
+                </li>
+            </ul>
         </Sider>
     );
 }
