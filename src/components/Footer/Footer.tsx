@@ -1,6 +1,7 @@
 /** Absolute imports */
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import classNames from 'classnames';
 
 /** Ant design */
 import { Layout, Menu } from 'antd';
@@ -9,6 +10,7 @@ import { UserOutlined, MessageOutlined, TeamOutlined, QuestionCircleOutlined } f
 /** Style */
 import classes from './styles.module.scss';
 import { routeNames } from '../../routes';
+
 
 const { Footer: FooterAntd } = Layout;
 
@@ -23,17 +25,28 @@ export const Footer: React.FC<PropsType> = ({ footerLongStyle = classes.footerLo
         <>
         <FooterAntd className={footerLongStyle} style={{ textAlign: 'center', marginTop: 'auto' }}>NKMessanger ©{new Date().getFullYear()} Created by Nikita Kirav</FooterAntd>
         <div className={footerShortStyle} style={{ textAlign: 'center', marginTop: 'auto' }}>
-            <Menu
-                className={classes.bottomMenu}
-                mode="horizontal"
-                defaultSelectedKeys={['1']}
-                defaultOpenKeys={['sub1']}
-            >
-                <Menu.Item key="1"><Link to={routeNames.profile}><UserOutlined className={classes.menuIcon} /></Link></Menu.Item>
-                <Menu.Item key="2"><Link to={routeNames.users}><TeamOutlined className={classes.menuIcon} /></Link></Menu.Item>
-                <Menu.Item key="3"><Link to={routeNames.chatlist}><MessageOutlined className={classes.menuIcon} /></Link></Menu.Item>
-                <Menu.Item key="4"><Link to={routeNames.about}><QuestionCircleOutlined className={classes.menuIcon} /></Link></Menu.Item>
-            </Menu>
+            <ul className={classNames(classes.bottomMenu, classes.menu_nav)}>
+                <li className={classes.menu_item}>
+                    <NavLink to={routeNames.myProfile} className={({isActive}) => isActive ? classNames(classes.active,classes.menu_link) : classes.menu_link}>
+                        <UserOutlined className={classes.menuIcon} />
+                    </NavLink>
+                </li>
+                <li className={classes.menu_item}>
+                    <NavLink to={routeNames.users} className={({isActive}) => isActive ? classNames(classes.active,classes.menu_link) : classes.menu_link}>
+                        <TeamOutlined className={classes.menuIcon} />
+                    </NavLink>
+                </li>
+                <li className={classes.menu_item}>
+                    <NavLink to={routeNames.chatlist} className={({isActive}) => isActive ? classNames(classes.active,classes.menu_link) : classes.menu_link}>
+                        <MessageOutlined className={classes.menuIcon} />
+                    </NavLink>
+                </li>
+                <li className={classes.menu_item}>
+                    <NavLink to={routeNames.about} className={({isActive}) => isActive ? classNames(classes.active,classes.menu_link) : classes.menu_link}>
+                        <QuestionCircleOutlined className={classes.menuIcon} />
+                    </NavLink>
+                </li>
+            </ul>
         </div>
         </>
     );

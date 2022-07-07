@@ -36,7 +36,7 @@ import { LayoutWrapper } from "../layouts/LayoutWrapper";
 const Routes = ({ history }: { history: History }) => {
 
   return (
-    <Router history={history}>
+    <Router history={history} basename={'/works/messenger/'}>
       <Switch>
           <Route path={routeNames.about} element={<LayoutWrapper type={'standart'} component={AboutPage} />} />
 
@@ -56,7 +56,7 @@ const Routes = ({ history }: { history: History }) => {
 
           <Route path={routeNames.chatlist} element={<LayoutWrapper type={'standart'} component={ChatList} />} />
 
-          {/*<Route path={routeNames.notFound} element={<FreeAuthorizedWrapper children={<WithLayout component={NotFound} layout={MinimalLayout} />} />} />*/}
+          <Route path={routeNames.notFound} element={<div>Hello world</div>} />
       </Switch>
     </Router>
   );
