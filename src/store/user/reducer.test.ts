@@ -2,7 +2,7 @@ import reducer, { INITIAL_STATE as initialState } from './reducer'
 import * as t from './actionTypes'
 import { UserType } from './types';
 
-const getUser = (followed: boolean = false): Array<UserType> => {
+const getUsers = (followed: boolean = false): Array<UserType> => {
     return [
         {
             id: '111',
@@ -28,7 +28,7 @@ describe('User Reducer', () => {
         const action = {
             type: t.SET_USERS,
             payload: {
-                users: getUser()
+                users: getUsers()
             }
         }
 
@@ -57,7 +57,7 @@ describe('User Reducer', () => {
     it("UNFOLLOW - The field 'followed' = False, only in the selected user (userId = 112).", () => {
         const initialStateWithUsers = {
             ...initialState,
-            users: getUser(true)    // users[1].followed = true
+            users: getUsers(true)    // users[1].followed = true
         };
 
         const action = {
@@ -69,7 +69,7 @@ describe('User Reducer', () => {
 
         expect(reducer(initialStateWithUsers, action)).toEqual({
             ...initialStateWithUsers,
-            users: getUser()
+            users: getUsers()
         });
     });
 
@@ -77,7 +77,7 @@ describe('User Reducer', () => {
     it("FOLLOW - The field 'followed' = True, only in the selected user (userId = 112).", () => {
         const initialStateWithUsers = {
             ...initialState,
-            users: getUser() // users[1].followed = false
+            users: getUsers() // users[1].followed = false
         };
 
         const action = {
@@ -89,14 +89,14 @@ describe('User Reducer', () => {
 
         expect(reducer(initialStateWithUsers, action)).toEqual({
             ...initialStateWithUsers,
-            users: getUser(true) // users[1].followed = true
+            users: getUsers(true) // users[1].followed = true
         })
     });
 
     it('FOLLOW - Error: because users[1].followed = true.', () => {
         const initialStateWithUsers = {
             ...initialState,
-            users: getUser() // users[1].followed = false
+            users: getUsers() // users[1].followed = false
         };
 
         const action = {

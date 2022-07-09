@@ -85,8 +85,16 @@
         display: none;
     }
     .header {
-        padding: 0 15px;
+        padding: 0 15px !important;
         position: fixed;
         width: 100%;
+    }
+    .comeBackText {
+        display: none;
+    }
+    .navigateComeBack::after {
+        content: 'Works';
+        font-size: 14px;
+        margin-left: 5px;
     }
 }

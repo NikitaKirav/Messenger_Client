@@ -22,6 +22,9 @@ import { ProfileType } from '../../store/profile/types';
 import Preloader from '../../components/Preloader/Preloader';
 import { MyPosts } from './MyPosts/MyPosts';
 
+/** Hooks */
+import { useComponentDidMount } from '../../hooks/useComponentDidMount';
+
 
 
 interface ProfilePageSelectors {
@@ -36,6 +39,7 @@ export const ProfilePage = () => {
     const params = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const isComponentMounted = useComponentDidMount();
 
     const selectors = createStructuredSelector<
         ApplicationState,
@@ -65,8 +69,10 @@ export const ProfilePage = () => {
 
     useEffect(() => {
         refreshProfile();
-        if (autorizedUserId===undefined && params.userId===undefined)
-            navigate(routeNames.about);
+        if(isComponentMounted) {
+            if (autorizedUserId===undefined && params.userId===undefined)
+                navigate(routeNames.about);
+        }
     },[params.userId, autorizedUserId]);
 
     if (!profile)

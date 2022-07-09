@@ -100,8 +100,13 @@ export const Header = () => {
 
     return (
         <Header className={classes.header}>
-        <div className={classes.comeBack}><a href={`/works`} ><div style={{display: 'flex'}}><div style={{fontSize: '13px'}}><LeftOutlined /></div>
-                        <span className={classes.comeBackText}>Come back to Works</span></div></a></div>
+        <div className={classes.comeBack}>
+            <a href={`/works`} >
+                <div className={classes.navigateComeBack} style={{display: 'flex'}}>
+                        <div style={{fontSize: '13px'}}><LeftOutlined /></div>
+                        <span className={classes.comeBackText}>Come back to Works</span>
+                </div>
+            </a></div>
         <div className="logo" />
         <Row className={classes.headerRow}>
             { isAuth

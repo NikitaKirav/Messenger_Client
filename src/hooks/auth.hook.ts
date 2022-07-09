@@ -3,15 +3,11 @@ import React, { useState, useCallback, useEffect } from 'react';
 const storageName = 'userData_Messanger';
 
 export const useAuth = () => {
-    const [token, setToken] = useState(null);
-    const [userId, setUserId] = useState(null);
+    const [token, setToken] = useState<string | null>(null);
+    const [userId, setUserId] = useState<string | null>(null);
 
     const login = useCallback((jwtToken: string, id: string) => {
-                //Исправить
-        //@ts-ignore
             setToken(jwtToken);
-                    //Исправить
-        //@ts-ignore
             setUserId(id);
 
             localStorage.setItem(storageName, JSON.stringify({ userId: id, token: jwtToken }));
@@ -24,9 +20,7 @@ export const useAuth = () => {
         },[]);
 
     useEffect(() => {
-                //Исправить
-        //@ts-ignore
-        const data = JSON.parse(localStorage.getItem(storageName));
+        const data = JSON.parse(localStorage.getItem(storageName)??'');
 
         if(data && data.token) {
             login(data.token, data.userId);
