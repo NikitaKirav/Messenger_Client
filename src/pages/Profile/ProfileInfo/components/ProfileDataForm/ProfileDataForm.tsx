@@ -24,13 +24,13 @@ type OwnPropsType = {
 
 type ProfileTypeKeys = Extract<keyof ProfileType, string>;
 
-const ProfileDataForm: React.FC<InjectedFormProps<ProfileType, OwnPropsType> & OwnPropsType> = ({handleSubmit, initialValues, error, onCancel}) => {
+export const ProfileDataForm: React.FC<InjectedFormProps<ProfileType, OwnPropsType> & OwnPropsType> = ({handleSubmit, initialValues, error, onCancel}) => {
 
     return (
         <form onSubmit={handleSubmit}>
         <div>
             <Divider plain>
-                <Button type="primary" onClick={handleSubmit}>
+                <Button type="primary" data-testid="submit" onClick={handleSubmit}>
                     Save
                 </Button>
                 <Button onClick={onCancel}>Cancel</Button>
@@ -43,19 +43,19 @@ const ProfileDataForm: React.FC<InjectedFormProps<ProfileType, OwnPropsType> & O
             <tbody>
             <tr>
                 <td className={classes.columnName} >Full name:</td>
-                <td>{createField<ProfileTypeKeys>("Full name", "fullName", [], Input)}</td>
+                <td>{createField<ProfileTypeKeys>("Full name", "fullName", [], Input, {"data-testid": "fullName"})}</td>
             </tr>
             <tr>
                 <td>Looking for a job:</td>
-                <td><div className={classes.checkbox}>{createField<ProfileTypeKeys>("", "lookingForAJob", [], Input, {type: "checkbox"})}</div></td>
+                <td><div className={classes.checkbox}>{createField<ProfileTypeKeys>("", "lookingForAJob", [], Input, {type: "checkbox", "data-testid": "lookingForAJob"})}</div></td>
             </tr>
             <tr>
                 <td>My professional skills:</td>
-                <td>{createField<ProfileTypeKeys>("My professional skills", "lookingForAJobDescription", [], Textarea)}</td>
+                <td>{createField<ProfileTypeKeys>("My professional skills", "lookingForAJobDescription", [], Textarea, {"data-testid": "lookingForAJobDescription"})}</td>
             </tr>
             <tr>
                 <td>About me:</td>
-                <td>{createField<ProfileTypeKeys>("About me", "aboutMe", [], Textarea)}</td>
+                <td>{createField<ProfileTypeKeys>("About me", "aboutMe", [], Textarea, {"data-testid": "aboutMe"})}</td>
             </tr>
             </tbody>
         </table>
@@ -68,7 +68,7 @@ const ProfileDataForm: React.FC<InjectedFormProps<ProfileType, OwnPropsType> & O
                     return (
                     <tr key={key} className={classes.contact}>
                         <td className={classes.columnName}>{key}:</td> 
-                        <td>{createField(key, "contacts." + key, [], Input)}</td>
+                        <td>{createField(key, "contacts." + key, [], Input, {"data-testid": key})}</td>
                     </tr>)
                 })}
                 </tbody>

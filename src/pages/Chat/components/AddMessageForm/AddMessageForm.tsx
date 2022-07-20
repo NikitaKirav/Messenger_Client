@@ -34,7 +34,7 @@ const { TextArea } = Input;
 export const AddMessageForm: React.FC<PathParamsType> = ({userId, status}) => {
     let [message, setMessage] = useState('');
     const dispatch = useDispatch();
-    const localData = JSON.parse(localStorage.getItem('userData_Messanger') ?? '');
+    const localData = JSON.parse(localStorage.getItem('userData_Messanger') ?? '{}');
     const [avatar, setAvatar] = useState('');
 
     const selectors = createStructuredSelector<
@@ -64,7 +64,7 @@ export const AddMessageForm: React.FC<PathParamsType> = ({userId, status}) => {
 
     return (
         <div className={classes.addMessageform}>
-            {avatar ? <Avatar src={baseUrl + avatar} alt={localData.userName} /> : <Avatar size={32} icon={<UserOutlined />} />}
+            {avatar ? <Avatar src={baseUrl + avatar} alt={localData.userName??''} /> : <Avatar size={32} icon={<UserOutlined />} />}
             <div style={{width: '100%', marginLeft: '15px'}}>                
                 <TextArea showCount onChange={(e) => setMessage(e.target.value)} value={message}  autoSize={{ minRows: 2, maxRows: 6 }} />
                 <Button className={classes.sendButton} type="primary" disabled={status !== 'ready'} onClick={sendMessageHandler}>Send</Button>

@@ -10,7 +10,6 @@ import rootSaga from "./rootSagas";
 import { AuthState } from "./auth/types";
 import { UserState } from "./user/types";
 import { ProfileState } from "./profile/types";
-import { DialogState } from "./dialog/types";
 import { ChatState } from "./chat/types";
 
 
@@ -18,7 +17,6 @@ export interface ApplicationState {
   auth: AuthState;
   user: UserState;
   profile: ProfileState;
-  dialog: DialogState;
   chat: ChatState;
 }
 

@@ -5,7 +5,6 @@ import { combineReducers } from "redux";
 import auth from "./auth/reducer";
 import user from "./user/reducer";
 import profile from "./profile/reducer";
-import dialog from "./dialog/reducer";
 import chat from "./chat/reducer";
 import { reducer as formReducer } from 'redux-form'
 
@@ -22,7 +21,6 @@ export default function createReducer(injectedReducers = {}) {
     auth,
     user,
     profile,
-    dialog,
     chat,
     router: routerReducer,
     form: formReducer,

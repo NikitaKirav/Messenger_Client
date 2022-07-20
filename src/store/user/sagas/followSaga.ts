@@ -16,7 +16,7 @@ import { APIResponseType, ResultCode } from "../../types";
 
 
 function* followSaga({
-    payload: { userId },
+    payload: { userId }
   }: FollowSuccess) {
   const { source, cancelToken } = createCancelToken();
 

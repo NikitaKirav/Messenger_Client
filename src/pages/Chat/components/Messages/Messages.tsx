@@ -20,7 +20,7 @@ interface MessagesSelectors {
 export const Messages: React.FC = () => {
     const messagesAnchorRef = useRef<HTMLDivElement>(null);
     const [isAutoScroll, setIsAutoScroll] = useState(false);
-    const localData = JSON.parse(localStorage.getItem('userData_Messanger') ?? '');
+    const localData = JSON.parse(localStorage.getItem('userData_Messanger') ?? '{}');
     const [data, setData] = useState<ChatMessageType[]>([]);
 
     const selectors = createStructuredSelector<
@@ -28,11 +28,12 @@ export const Messages: React.FC = () => {
         MessagesSelectors
     >({
         message: makeGetMessage(),
-        messages: makeGetMessages()
+        messages: makeGetMessages(),
     });
 
     const { message, messages } = useSelector(selectors);
 
+  
     useEffect(() => {
         setData(messages);
         setIsAutoScroll(true);

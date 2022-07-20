@@ -8,25 +8,24 @@ import { createStructuredSelector } from 'reselect';
 import { Form, Input, Button, Alert } from 'antd';
 
 /** Store */
-import { registerRequest } from '../../store/auth/actions';
 import { ApplicationState } from '../../store';
 import { makeGetError, makeGetRegisterSuccess } from '../../store/auth/selectors';
 
+/** Types */
+import { RegisterFormValuesType } from './RegisterPage';
 
-interface RegisterFormValuesType {
-    email: string
-    password: string,
-    userName: string
-}
 
 interface RegisterSelectors {
     registerSuccess: boolean;
     error: string | undefined;
 }
 
-const Register: React.FC = () => {
+interface RegisterFormProps {
+  onFinish: (formData: RegisterFormValuesType) => void;
+  onFinishFailed: (errorInfo: any) => void;
+}
 
-    const dispatch = useDispatch();
+export const RegisterForm: React.FC<RegisterFormProps> = ({onFinish, onFinishFailed}) => {
 
     const selectors = createStructuredSelector<
         ApplicationState,
@@ -46,12 +45,6 @@ const Register: React.FC = () => {
         wrapperCol: { offset: 8, span: 16 },
       };
 
-    const onFinish = (formData: RegisterFormValuesType) => {
-        dispatch(registerRequest(formData.email, formData.password, formData.userName));
-    };
-
-    const onFinishFailed = (errorInfo: any) => {
-    };
 
     return (
         <Form
@@ -83,7 +76,7 @@ const Register: React.FC = () => {
           name="userName"
           rules={[{ required: true, message: 'Please input your name!' }]}
         >
-          <Input />
+          <Input data-testid="userName" />
         </Form.Item>
 
         <Form.Item
@@ -91,7 +84,7 @@ const Register: React.FC = () => {
           name="email"
           rules={[{ required: true, message: 'Please input your email!' }]}
         >
-          <Input />
+          <Input data-testid="email" />
         </Form.Item>
   
         <Form.Item
@@ -99,11 +92,11 @@ const Register: React.FC = () => {
           name="password"
           rules={[{ required: true, message: 'Please input your password!' }]}
         >
-          <Input.Password />
+          <Input.Password data-testid="password" />
         </Form.Item>
   
         <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" data-testid="submit">
             Submit
           </Button>
         </Form.Item>
@@ -112,7 +105,4 @@ const Register: React.FC = () => {
     );
 }
 
-export const RegisterForm = reduxForm<RegisterFormValuesType>({
-    form: 'registerMessanger'
-})(Register);
 

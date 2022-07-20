@@ -5,12 +5,13 @@ import React from 'react';
 import { Layout } from 'antd';
 
 /** Components */
-import { Header } from '../../components/Header/Header';
 import { LeftMenu } from '../../components/LeftMenu/LeftMenu';
 import { Footer } from '../../components/Footer/Footer';
+import { HeaderContainer } from '../../components/Header/HeaderContainer';
 
 /** Style */
 import classes from './styles.module.scss';
+
 
 
 const { Content } = Layout;
@@ -25,7 +26,7 @@ export const StandartLayout: React.FC<Props>  = ({component: Component, ...rest}
 
     return (
         <Layout className={classes.content}>
-            <Header />
+            <HeaderContainer />
             <Content className={classes.contentBlock}>
                 <Layout className={classes.layoutInfo}>
                     <LeftMenu className={classes.leftMenu} />

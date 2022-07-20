@@ -67,7 +67,6 @@ export const createChannel = () => {
  */
 
 const _notifySubscribersAboutStatus = (status: StatusType) => {
-    console.log('notific', status)
     subscribes[EventsName.STATUS].forEach(s => s(status));
 }
 
@@ -82,9 +81,8 @@ const _messageHandler = (e: MessageEvent) => {
 }
 
 const _openHandler = () => {
-    console.log("ready!!!")
     _notifySubscribersAboutStatus(StatusType.READY);
-    const userData = localStorage.getItem('userData_Messanger') ? JSON.parse(localStorage.getItem('userData_Messanger')??'') : '';
+    const userData = localStorage.getItem('userData_Messanger') ? JSON.parse(localStorage.getItem('userData_Messanger')??'{}') : '{}';
     if (userData && userData.token) {
         _ws?.send(`{"token": "${userData.token}", "action": "auntification"}`);
     }

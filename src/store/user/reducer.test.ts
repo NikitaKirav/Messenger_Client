@@ -2,26 +2,26 @@ import reducer, { INITIAL_STATE as initialState } from './reducer'
 import * as t from './actionTypes'
 import { UserType } from './types';
 
-const getUsers = (followed: boolean = false): Array<UserType> => {
-    return [
-        {
-            id: '111',
-            name: 'user1',
-            status: '',
-            photos: { small: null, large: null },
-            followed: false
-        },
-        {
-            id: '112',
-            name: 'user2',
-            status: '',
-            photos: { small: null, large: null },
-            followed: followed
-        }
-    ];
-}
-
 describe('User Reducer', () => {
+
+    const getUsers = (followed: boolean = false): Array<UserType> => {
+        return [
+            {
+                id: '111',
+                name: 'user1',
+                status: '',
+                photos: { small: null, large: null },
+                followed: false
+            },
+            {
+                id: '112',
+                name: 'user2',
+                status: '',
+                photos: { small: null, large: null },
+                followed: followed
+            }
+        ];
+    }
 
     /** SET_USERS */
     it('SET_USERS - save new users.', () => {

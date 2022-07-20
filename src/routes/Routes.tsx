@@ -1,6 +1,6 @@
 /** Absolute imports */
-import React, { useEffect } from "react";
-import { Route, Routes as Switch, BrowserRouter } from "react-router-dom";
+import React from "react";
+import { Route, Routes as Switch } from "react-router-dom";
 import { History } from "history";
 import { HistoryRouter as Router } from "redux-first-history/rr6";
 
@@ -10,21 +10,17 @@ import { UsersPage } from "../pages/Users/UsersPage";
 import { LoginPage } from "../pages/Login/LoginPage";
 import { ProfilePage } from "../pages/Profile/ProfilePage";
 import { RegisterPage } from "../pages/Register/RegisterPage";
-import { DialogsPage } from "../pages/Dialogs/DialogsPage";
+//import { DialogsPage } from "../pages/Dialogs/DialogsPage";
 import { ChatPage } from "../pages/Chat/ChatPage";
-import { ChatList } from "../pages/ChatList/ChatList";
+import { ChatListContainer } from "../pages/ChatList/ChatListContainer";
 
 /** Components */
 import Preloader from "../components/Preloader/Preloader";
-import { StandartLayout } from "../layouts/Standart/StandartLayout";
 
 /** Enums */
 import { routeNames } from "./routeNames";
-import { useDispatch } from "react-redux";
 
 /** Store */
-import { initializeApp } from "../store/auth/actions";
-import { startMessagesListening, stopMessagesListening } from "../store/chat/actions";
 import { LayoutWrapper } from "../layouts/LayoutWrapper";
 
 
@@ -44,7 +40,7 @@ const Routes = ({ history }: { history: History }) => {
           
           <Route path={routeNames.myProfile} element={<LayoutWrapper type={'standart'} component={ProfilePage} />} />
           
-          <Route path={routeNames.dialogs} element={<LayoutWrapper type={'standart'} component={DialogsPage} />} />
+          {/*<Route path={routeNames.dialogs} element={<LayoutWrapper type={'standart'} component={DialogsPage} />} />*/}
 
           <Route path={routeNames.users} element={<LayoutWrapper type={'standart'} component={UsersPage} />} />
 
@@ -54,7 +50,7 @@ const Routes = ({ history }: { history: History }) => {
           
           <Route path={routeNames.chat} element={<LayoutWrapper type={'standart'} component={ChatPage} />} />
 
-          <Route path={routeNames.chatlist} element={<LayoutWrapper type={'standart'} component={ChatList} />} />
+          <Route path={routeNames.chatlist} element={<LayoutWrapper type={'standart'} component={ChatListContainer} />} />
 
           <Route path={routeNames.notFound} element={<div>Hello world</div>} />
       </Switch>

@@ -69,7 +69,6 @@ export const ImageAvatar: React.FC<ImageAvatarType> = React.memo(({profile, isOw
             onSuccess("Ok");
         },
         onChange: (info: any) => {
-            console.log(info);
             setDefaultFileList(info.fileList);
             if (info.file.status !== 'uploading') {
                 onMainPhotoSelected(info);
@@ -84,7 +83,7 @@ export const ImageAvatar: React.FC<ImageAvatarType> = React.memo(({profile, isOw
             { isOwner ? 
                 <div>
                     <div className={classes.updateButtonBig}>
-                        <Button onClick={showModal} className={classes.updateButton}>
+                        <Button onClick={showModal} data-testid="editPhotoButton" className={classes.updateButton}>
                             Edit photo
                         </Button>
                     </div>

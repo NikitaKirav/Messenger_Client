@@ -60,7 +60,6 @@ export const MyPosts: React.FC<PropsType> = ({profile, isAuth}) => {
 
 
     useEffect(() => {
-        console.log(profile)
         if(profile && profile.userId) {
             dispatch(getPosts(profile.userId));   
       

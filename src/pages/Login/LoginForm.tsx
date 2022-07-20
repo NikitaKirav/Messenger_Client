@@ -2,7 +2,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { reduxForm } from 'redux-form';
 
 /** Ant design */
 import { Form, Input, Button, Alert, Checkbox } from 'antd';
@@ -11,7 +10,6 @@ import { Form, Input, Button, Alert, Checkbox } from 'antd';
 import { LoginFormValuesType } from './LoginPage';
 
 /** Store */
-import { loginRequest } from '../../store/auth/actions';
 import { ApplicationState } from '../../store';
 import { makeGetError } from '../../store/auth/selectors';
 
@@ -20,9 +18,12 @@ interface LoginSelectors {
     error: string | undefined;
 }
 
-const Login = () => {
-    
-    const dispatch = useDispatch();
+interface LoginProps {
+  onFinish: (formData: LoginFormValuesType) => void;
+  onFinishFailed: (errorInfo: any) => void;
+}
+
+export const LoginForm: React.FC<LoginProps> = ({onFinish, onFinishFailed}) => {
 
     const selectors = createStructuredSelector<
         ApplicationState,
@@ -41,19 +42,11 @@ const Login = () => {
         wrapperCol: { offset: 8, span: 16 },
       };
 
-    const onFinish = (formData: LoginFormValuesType) => {
-        console.log('Success:', formData);
-        dispatch(loginRequest(formData.email, formData.password));
-    };
-
-    const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
-    };
-
     return (
         <Form
         {...layout}
         name="basic"
+        data-testid="form"
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
@@ -68,10 +61,10 @@ const Login = () => {
         <div style={{marginTop: '20px'}}>
         <Form.Item
           label="Email"
-          name="email"
+          name="email"          
           rules={[{ required: true, message: 'Please input your email!' }]}
         >
-          <Input />
+          <Input data-testid="email" />
         </Form.Item>
   
         <Form.Item
@@ -79,15 +72,15 @@ const Login = () => {
           name="password"
           rules={[{ required: true, message: 'Please input your password!' }]}
         >
-          <Input.Password />
+          <Input.Password data-testid="password" />
         </Form.Item>
   
         <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-          <Checkbox>Remember me</Checkbox>
+          <Checkbox data-testid="rememberme">Remember me</Checkbox>
         </Form.Item>
   
         <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" data-testid="submit" htmlType="submit">
             Submit
           </Button>
         </Form.Item>
@@ -95,7 +88,3 @@ const Login = () => {
       </Form>
     );
 }
-
-export const LoginForm = reduxForm<LoginFormValuesType>({
-    form: 'login'
-})(Login);

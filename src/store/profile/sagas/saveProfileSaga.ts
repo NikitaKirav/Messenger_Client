@@ -17,7 +17,6 @@ import { ProfileType } from "../types";
 
 /** Selectors */
 import { makeGetUserId } from "../../auth/selectors";
-import { stopSubmit } from "redux-form";
 
 
 function* saveProfileSaga({

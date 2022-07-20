@@ -1,6 +1,5 @@
 /** Absolute imports */
-import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 
@@ -17,15 +16,23 @@ import classes from './styles.module.scss';
 import { ApplicationState } from '../../store';
 import { makeGetIsAuth } from '../../store/auth/selectors';
 import { routeNames } from '../../routes';
+import { registerRequest } from '../../store/auth/actions';
 
 
 interface RegisterPageSelectors {
     isAuth: boolean;
 }
 
+export interface RegisterFormValuesType {
+    email: string
+    password: string,
+    userName: string
+}
+
 export const RegisterPage = () => {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const selectors = createStructuredSelector<
         ApplicationState,
@@ -36,6 +43,13 @@ export const RegisterPage = () => {
 
     const { isAuth } = useSelector(selectors);
 
+    const onFinish = (formData: RegisterFormValuesType) => {
+        dispatch(registerRequest(formData.email, formData.password, formData.userName));
+    };
+
+    const onFinishFailed = (errorInfo: any) => {
+    };
+
     if(isAuth) {
       navigate(routeNames.myProfile);
     }
@@ -44,7 +58,7 @@ export const RegisterPage = () => {
         <div className={classes.loginForm}>
             <h1>Register</h1>    
             <Divider />        
-            <RegisterForm />
+            <RegisterForm onFinish={onFinish} onFinishFailed={onFinishFailed} />
         </div>
     );
 }

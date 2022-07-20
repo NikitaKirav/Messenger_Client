@@ -2,7 +2,7 @@ export enum routeNames {
     about = "/",
     profile = "/profile/:userId",
     myProfile = "/profile",
-    dialogs = "/dialogs",
+    //dialogs = "/dialogs",
     users = "/users",
     login = "/login",
     register = "/register",

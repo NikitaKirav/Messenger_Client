@@ -11,7 +11,6 @@ import { setError } from "../actions";
 function* getChatListSaga() {
 
   try {
-
     yield call(getChatList);
 
   } catch (e) {

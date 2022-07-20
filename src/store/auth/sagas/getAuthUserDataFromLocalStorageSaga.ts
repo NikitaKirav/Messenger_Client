@@ -12,7 +12,6 @@ function* getAuthUserDataFromLocalStorageSaga() {
     const data = localStorage.getItem(storageName) ? JSON.parse(localStorage.getItem(storageName) ?? "") : '';
     
     if(data && data.token) {
-      console.log(data);
       yield put(setAuthUserData(data.userId, data.token));
     }
   } catch (e) {

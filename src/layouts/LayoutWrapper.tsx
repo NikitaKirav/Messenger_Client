@@ -23,7 +23,6 @@ export const LayoutWrapper: React.FC<Props> = ({type, component, ...rest}) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('initializeApp')
       dispatch(initializeApp());
       dispatch(startMessagesListening(dispatch));
       return () => {

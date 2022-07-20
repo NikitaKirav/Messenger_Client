@@ -18,7 +18,6 @@ function* startMessagesListeningSaga({
 }: StartMessagesListening) {
 
   try {
-    console.log('start')
     yield call(start);
     yield call(
             subscribe,

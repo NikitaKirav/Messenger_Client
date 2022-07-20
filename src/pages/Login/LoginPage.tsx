@@ -44,9 +44,13 @@ export const LoginPage = () => {
 
     const { isAuth } = useSelector(selectors);
 
-    const onSubmit = (formData: LoginFormValuesType) => {
+    const onFinish = (formData: LoginFormValuesType) => {
         dispatch(loginRequest(formData.email, formData.password));
-    }
+    };
+
+    const onFinishFailed = (errorInfo: any) => {
+
+    };
 
     if(isAuth) {
       navigate(routeNames.myProfile)
@@ -54,6 +58,6 @@ export const LoginPage = () => {
     return <div className={classes.loginForm}>  
         <h1>Login</h1>   
         <Divider />
-        <LoginForm  onSubmit={onSubmit} />
+        <LoginForm onFinish={onFinish} onFinishFailed={onFinishFailed}  />
     </div>
 }

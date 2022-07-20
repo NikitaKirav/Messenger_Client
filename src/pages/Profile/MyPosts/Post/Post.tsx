@@ -65,13 +65,13 @@ export const Post: React.FC<PropsType> = ({post, userId, isAuth}) => {
   
     const actions = [
       <Tooltip key="comment-basic-like" title="Like">
-        <span onClick={like}>
+        <span onClick={like} data-testid="like">
           {createElement(action === 'liked' ? LikeFilled : LikeOutlined)}
           <span className="comment-action">{likes}</span>
         </span>
       </Tooltip>,
       <Tooltip key="comment-basic-dislike" title="Dislike">
-        <span onClick={dislike}>
+        <span onClick={dislike} data-testid="dislike">
           {React.createElement(action === 'disliked' ? DislikeFilled : DislikeOutlined)}
           <span className="comment-action">{dislikes}</span>
         </span>
@@ -95,9 +95,9 @@ export const Post: React.FC<PropsType> = ({post, userId, isAuth}) => {
                 <Link to={`/profile/${post.userId}`}>
                 <span className={classes.userName}>{post.userName}</span>
                 </Link>
-                <Dropdown overlay={menu} className={classes.postMenu} placement="bottomRight">
-                        <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                            <DownOutlined className={classes.menuIcon} />
+                <Dropdown overlay={menu} className={classes.postMenu}  placement="bottomRight">
+                        <a className="ant-dropdown-link"  onClick={e => e.preventDefault()}>
+                            <DownOutlined className={classes.menuIcon} data-testid="postMenu" />
                         </a>
                 </Dropdown>
                 </>}

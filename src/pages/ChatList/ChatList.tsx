@@ -1,74 +1,33 @@
 /** Absolute imports */
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroller';
-import { createStructuredSelector } from 'reselect';
 
 /** Ant design */
-import { List, message, Avatar, Spin, Comment } from 'antd';
+import { List, Avatar, Spin, Comment } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
-/** Services */
-import { StatusType } from '../../services/api-ws';
-
 /** Store */
-import { ApplicationState } from '../../store';
-import { makeGetcChatList, makeGetStatus } from '../../store/chat/selectors';
 import { LastMessageInChatList } from '../../store/chat/types';
-import { getChatList } from '../../store/chat/actions';
 
 /** Styles */
 import classes from './styles.module.scss';
 import { baseUrl } from '../../services/baseURL';
 
 
-
-interface ChatListSelectors {
-    status: StatusType;
-    chatList: LastMessageInChatList[];
+interface ChatListProps {
+    handleInfiniteOnLoad: () => void;
+    isLoading: boolean;
+    hasMore: boolean;
+    data: LastMessageInChatList[];
 }
 
-export const ChatList = () => {
-
-    const [data, setData] = useState<LastMessageInChatList[]>([]);
-    const [isLoading, changeIsLoading] = useState(false);
-    const [hasMore, changeHasMore] = useState(true);
-    const dispatch = useDispatch();
-
-
-    const selectors = createStructuredSelector<
-        ApplicationState,
-        ChatListSelectors
-    >({
-        status: makeGetStatus(),
-        chatList: makeGetcChatList()
-    });
-
-    const { status, chatList } = useSelector(selectors);
-
-    
-    const handleInfiniteOnLoad = () => {
-        changeIsLoading(true);
-
-        if (data.length > 14) {
-          message.warning('Infinite List loaded all');
-          changeIsLoading(false);
-          changeHasMore(false);
-          return;
-        }
-    };
-
-    useEffect(() => {
-        if(status === "ready") {
-            dispatch(getChatList());
-        }
-    }, [status]);
-
-    useEffect(() => {
-        setData(chatList);
-    }, [chatList])
-
+export const ChatList: React.FC<ChatListProps> = ({
+    handleInfiniteOnLoad,
+    isLoading,
+    hasMore,
+    data
+}) => {
 
     return (
         <div className={classes.chatList}>
@@ -82,7 +41,7 @@ export const ChatList = () => {
         >
             <List
                 className="comment-list"
-                header={`${data.length} replies`}
+                header={`${data ? data.length : 0} replies`}
                 itemLayout="horizontal"
                 dataSource={data}
                 renderItem={item => (

@@ -38,28 +38,28 @@ export const unsubscribe = (
 }
 
 export const sendMessage = (userId: string, text: string, addressee: string) => {
-    const userData = JSON.parse(localStorage.getItem('userData_Messanger')??'');
+    const userData = JSON.parse(localStorage.getItem('userData_Messanger')??'{}');
     if (userData) {
         ws.sendMessage(`{"from": "${userId}", "text": "${text}", "to": "${addressee}", "token": "${userData.token}", "action": "saveMessage" }`);
     }
 }
 
 export const getChatList = () => {
-    const userData = JSON.parse(localStorage.getItem('userData_Messanger')??'');
+    const userData = JSON.parse(localStorage.getItem('userData_Messanger')??'{}');
     if (userData) {
         ws.sendMessage(`{"token": "${userData.token}", "action": "getChatList" }`);
     }
 }
 
 export const getMessagesFromUser = (userId: string) => {
-    const userData = JSON.parse(localStorage.getItem('userData_Messanger')??'');
+    const userData = JSON.parse(localStorage.getItem('userData_Messanger')??'{}');
     if (userData) {
         ws.sendMessage(`{"token": "${userData.token}", "action": "getMessagesFromUser", "to": "${userId}" }`);
     }
 }
 
 export const getUserAvatar = (userId: string) => {
-    const userData = JSON.parse(localStorage.getItem('userData_Messanger')??'');
+    const userData = JSON.parse(localStorage.getItem('userData_Messanger')??'{}');
     if (userData) {
         ws.sendMessage(`{"token": "${userData.token}", "action": "getUserAvatar", "userId": ["${userId}"] }`);
     }
