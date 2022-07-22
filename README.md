@@ -1,5 +1,7 @@
 # Messenger. Client part.
 
+![screenshot of Messenger](https://kirav.ru/images/articles/images_for_github/messenger_client/20220722152800screen-messenger-min.jpg)
+
 This project is an example of [Messenger](https://kirav.ru/works/messenger/). It had educational purposes and now you can see a result in my code here.\ 
 This is a big learning project with a lot of complex stuff. I take ideas from modern messengers and social networks and try to repeat the result as fully as possible.
 
