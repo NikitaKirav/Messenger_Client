@@ -13,8 +13,9 @@ In this moment it has the following opportunities:
 
 Project use the following technologies:
 - [x] Frontend: React + Redux, Sagas, TypeScript
-- [ ] Backend: NodeJS
+- [ ] Backend: NodeJS + Express + Mongoose
 - [ ] Database: MongoDb
+
 Frontend and Backend part have unit and integration tests.
 
 - [x] - current repository
