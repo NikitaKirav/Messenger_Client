@@ -19,7 +19,7 @@ import { WriteMessageOrFollow } from '../WriteMessageOrFollow/WriteMessageOrFoll
 import { ReactCropper } from '../ReactCropper/ReactCropper';
 
 /** Images */
-import userPhoto from '../../../../../assets/images/user_default.png';
+import userPhoto from '../../../../../assets/images/user_default.jpg';
 
 /** Styles */
 import classes from '../../styles.module.scss';
